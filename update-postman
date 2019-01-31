@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+FILE_NAME=postman-latest.tar.gz
+INSTALLATION_FOLDER="/opt/Postman"
+BACKUP_FOLDER="$INSTALLATION_FOLDER.bak"
+
+cd /tmp
+
+echo "Removing old version of Postman"
+sudo mv $INSTALLATION_FOLDER "$INSTALLATION_FOLDER.bak"
+
+echo "Downloading latest version..."
+rm -f $FILE_NAME
+curl -s "https://dl.pstmn.io/download/latest/linux64" > $FILE_NAME
+
+echo "Decompressing into installation folder..."
+sudo tar -xzf $FILE_NAME -C "/opt"
+
+echo "Deleting old version..."
+sudo rm -r $BACKUP_FOLDER
+
+echo "Postman was updated!"
